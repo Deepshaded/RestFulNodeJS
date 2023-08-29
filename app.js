@@ -23,8 +23,13 @@ const Book = require('./models/bookModel');
 const bookRouter = express.Router();
 
 bookRouter.route('/books').get((req, res) => {
-	const response={hello:"this is my API"};
-	res.json(response);
+	Book.find().exec() 
+	.then(docs=>res.status(200)
+	.json(docs))
+	.catch(err=>res.status(500)
+	.json({
+		message:"Error to fetch",
+			error:err }))
 });
 
 app.use('/api', bookRouter);
