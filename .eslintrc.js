@@ -4,7 +4,7 @@ module.exports = {
 		'commonjs': true,
 		'es2021': true
 	},
-	'extends': 'eslint:recommended',
+	'extends': 'airbnb-base',
 	'overrides': [
 		{
 			'env': {
@@ -37,6 +37,7 @@ module.exports = {
 		'semi': [
 			'error',
 			'always'
-		]
+		],
+		"comma-dangle":0
 	}
 };
