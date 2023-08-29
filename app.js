@@ -23,7 +23,15 @@ const Book = require('./models/bookModel');
 const bookRouter = express.Router();
 
 bookRouter.route('/books').get((req, res) => {
-	Book.find().exec() 
+
+	// const qry={
+    //     genre: req.query
+    //   }
+
+	//http://localhost:4000/api/books?genre=Fantasy
+	const {query}=req;
+	
+	Book.find(query).exec() 
 	.then(docs=>res.status(200)
 	.json(docs))
 	.catch(err=>res.status(500)
