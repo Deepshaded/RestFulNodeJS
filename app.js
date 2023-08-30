@@ -1,6 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
-
+const bodyParser=require('body-parser');
 const app = express();
 const port = process.env.PORT || 3000;
 
@@ -22,12 +22,17 @@ const Book = require('./models/bookModel');
 
 const bookRouter = express.Router();
 
-bookRouter.route('/books').get((req, res) => {
+app.use(bodyParser.urlencoded({extended:true}));
+app.use(bodyParser.json());
 
-	// const qry={
-    //     genre: req.query
-    //   }
-
+bookRouter.route('/books')
+.post((req, res) => {
+	const book=new Book(req.body);
+	console.log(book);
+	book.save();
+	return res.status(201).json(book);
+})
+.get((req, res) => {
 	//http://localhost:4000/api/books?genre=Fantasy
 	const query={}
 
